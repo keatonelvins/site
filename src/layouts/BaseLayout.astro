@@ -1,0 +1,84 @@
+---
+import '../styles/global.css';
+
+const { title } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preload" href="/fonts/Sentient-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Sentient-VariableItalic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Switzer-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Switzer-VariableItalic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <title>{title}</title>
+    <!-- Dark mode initialization (blocking to prevent flash) -->
+    <script is:inline>
+      const scheme = localStorage.getItem('theme');
+      if (!scheme) {
+        const mql = window.matchMedia('(prefers-color-scheme: dark)');
+        document.documentElement.classList.toggle('dark', mql.matches);
+        mql.onchange = (e) => document.documentElement.classList.toggle('dark', e.matches);
+      } else {
+        document.documentElement.classList.toggle('dark', scheme === 'dark');
+      }
+    </script>
+    <!-- Scrollbar detection (non-Mac only) -->
+    <script is:inline>
+      if (!navigator.userAgent.includes('Mac OS')) {
+        document.documentElement.classList.add('bars');
+      }
+    </script>
+  </head>
+  <body class="font-[Sentient-Variable] relative min-h-screen" style="background-color: var(--color-background); color: var(--color-foreground);">
+    <div class="mx-auto max-w-3xl px-4 py-8">
+      <header class="mb-8 flex items-center justify-between">
+        <slot name="header-content">
+          <a href="/" class="text-sm hover:underline">← back</a>
+        </slot>
+        <button id="theme-toggle" class="text-sm hover:underline" style="color: var(--color-muted);">
+          <span class="dark:hidden">☀️</span>
+          <span class="hidden dark:inline">🌙</span>
+        </button>
+      </header>
+      <slot />
+    </div>
+    <!-- Theme toggle script -->
+    <script is:inline>
+      const toggle = document.getElementById('theme-toggle');
+      toggle?.addEventListener('click', () => {
+        const current = localStorage.getItem('theme');
+        let next;
+
+        if (!current) {
+          // system -> light
+          next = 'light';
+        } else if (current === 'light') {
+          // light -> dark
+          next = 'dark';
+        } else {
+          // dark -> system
+          localStorage.removeItem('theme');
+          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', isDark);
+          return;
+        }
+
+        localStorage.setItem('theme', next);
+        document.documentElement.classList.toggle('dark', next === 'dark');
+      });
+    </script>
+    <!-- Paper texture overlay -->
+    <div
+      style="background-image:url(/paper-light.jpeg);mix-blend-mode:multiply;opacity:0.3;"
+      class="pointer-events-none fixed inset-0 z-50 select-none bg-repeat bg-[length:512px_512px] dark:hidden"
+    ></div>
+    <div
+      style="background-image: url(/paper-dark.jpg)"
+      class="pointer-events-none fixed inset-0 z-50 select-none bg-repeat bg-[length:512px_512px] opacity-5 hidden dark:block"
+    ></div>
+  </body>
+</html>

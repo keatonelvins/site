@@ -1,0 +1,23 @@
+.Table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+
+  & thead {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  & th {
+    text-align: left;
+  }
+
+  & th,
+  & td {
+    padding: 0.5rem;
+
+    @media (min-width: 768px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}

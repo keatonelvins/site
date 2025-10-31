@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
+import { createHeading } from '../../components/prose/Heading';
+import { Ol } from '../../components/prose/Ol';
+import { Ul } from '../../components/prose/Ul';
+import { Blockquote } from '../../components/prose/Blockquote';
+import { Code } from '../../components/prose/Code';
+import { Table } from '../../components/prose/Table';
+import { Paragraph } from '../../components/prose/Paragraph';
+import { Link } from '../../components/prose/Link';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const components = {
+  h1: createHeading('h1'),
+  h2: createHeading('h2'),
+  h3: createHeading('h3'),
+  h4: createHeading('h4'),
+  h5: createHeading('h5'),
+  h6: createHeading('h6'),
+  ol: Ol,
+  ul: Ul,
+  blockquote: Blockquote,
+  code: Code,
+  table: Table,
+  p: Paragraph,
+  a: Link,
+};
+---
+<BlogPostLayout frontmatter={post.data} headings={headings}>
+  <Content components={components} />
+</BlogPostLayout>

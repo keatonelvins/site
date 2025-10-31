@@ -1,0 +1,30 @@
+.Heading {
+  &:is(h1, h2, h3, h4, h5, h6) {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+
+    font-family: 'Switzer-Variable', sans-serif;
+    font-weight: 555;
+    font-size: 1em;
+  }
+
+  & > a {
+    text-decoration: none;
+    color: inherit;
+
+    &::after {
+      transition: opacity 0.2s;
+      content: "#";
+      display: inline-flex;
+      height: 100%;
+      margin-left: 0.5rem;
+      font-size: 0.7em;
+      color: var(--color-muted);
+      opacity: 0;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+}

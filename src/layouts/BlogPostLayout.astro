@@ -1,0 +1,15 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents/TableOfContents.astro';
+import '../styles/prose.css';
+import '../styles/shiki.css';
+
+const { frontmatter, headings = [] } = Astro.props;
+---
+<BaseLayout title={frontmatter.title}>
+  <div class="prose pb-[50vh]">
+    <h1>{frontmatter.title}</h1>
+    <slot />
+  </div>
+  <TableOfContents headings={headings} />
+</BaseLayout>

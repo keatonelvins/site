@@ -1,0 +1,55 @@
+.Ol {
+  counter-reset: ol var(--start, 0);
+  list-style-type: none !important;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  & > li {
+    list-style-type: none !important;
+    text-indent: -1.5em;
+    padding-left: 1.5em;
+    margin-top: 0.5em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:before {
+      color: oklch(0.45 0.01 265);
+
+      @dark {
+        color: oklch(0.65 0.01 150);
+      }
+
+      counter-increment: ol;
+      content: counter(ol) ".";
+      font-style: italic;
+      font-family: 'Sentient-Variable', serif;
+      font-size: 1em;
+      font-weight: 700;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      text-align: right;
+      min-width: 0.75em;
+      margin-right: 0.5em;
+      user-select: none;
+    }
+  }
+
+  & li {
+    line-height: 1.75;
+  }
+
+  & li > p {
+    display: contents;
+  }
+
+  ul &,
+  ol & {
+    margin-top: 0;
+  }
+}

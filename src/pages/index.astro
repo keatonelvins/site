@@ -1,16 +1,37 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
+<BaseLayout title="Keaton Elvins">
+  <div slot="header-content">
+    <h1 class="text-muted">keaton elvins</h1>
+  </div>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <main class="mb-12 max-w-prose">
+    <p class="mb-6 text-muted text-sm">
+      "It is only through the confining act of writing that the immensity of the nonwritten becomes legible"
+      <br />
+      <span class="text-xs">— Italo Calvino, <em>If on a Winter's Night a Traveler</em></span>
+    </p>
+    <p>I just want to understand, is all.</p>
+  </main>
+
+  <ul class="space-y-4">
+    {posts.map(post => (
+      <li>
+        <a
+          href={`/blog/${post.id}`}
+          class="block group"
+        >
+          <h2 class="text-3xl md:text-5xl font-semibold leading-tight md:leading-tight group-hover:underline">
+            {post.data.title}
+          </h2>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

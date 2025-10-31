@@ -1,0 +1,49 @@
+---
+title: "midtraining"
+date: 2025-10-30
+---
+
+## Introduction
+
+In just under 10 months since Doria Alexander's essay *What's the deal with mid-training?*, a lot has changed. RL had its ups and downs, there were winners and losers, and Claude even got to run a vending machine. But midtraining seemingly did not get the buzz that Doria predicted, at least not yet. Are we just early?
+
+<aside>
+See Doria's original essay: [What's the deal with mid-training?](https://www.interconnects.ai/p/whats-the-deal-with-mid-training)
+</aside>
+
+## The Overshadowed Middle Child
+
+One reason might be that midtraining is often overshadowed by its flashier upstream and downstream neighbors; pretraining has the gravitas of the largest buildout in the history of the states, and posttraining gets all the lovely hill-climbing graphs (with an additional air of mystique at the frontier).
+
+> pretraining is an elegant science, done by mathematicians who sit in cold rooms writing optimization theory on blackboards, engineers with total absorb of distributed systems of titanic scale
+> posttraining is hair raising cowboy research where people drinking a lot of diet coke yell new hyperparameters to try at each other across the room. it's doing too many tables! the vibes are getting worse, turn down the knob! checkpoint gpt-9-final-v320-restart4 is calling me names! the goose is loose
+
+<aside>
+From [@tszzl on X](https://x.com/tszzl/status/1881832891503231161)
+</aside>
+
+What about midtraining, roon? Huh?? You out of funny words?
+
+## Defining Midtraining
+
+For now, I'll just borrow a definition from Octothinker, although definitely check out Doria's piece for more context:
+
+>Mid-training is a mid-stage whose computational and data (token) requirements are intermediate between pre-training and post-training. It aims to achieve specific objectives — such as domain and language expansion (Dou et al., 2025, inter alia), long-context extension (Abdin et al., 2024a,b, inter alia), improving data quality (Hu et al., 2024a; OLMo et al., 2025, inter alia), leveraging large-scale synthetic data (Yang et al., 2024a, 2025, 2024b, inter alia), and preparing for post-training, among others—by significantly altering data quality and distribution (Dubey et al., 2024; Wake et al., 2024, inter alia) (and/or modifying model architecture to improve inference efficiency (Bercovich et al., 2024, 2025, inter alia)).
+
+<aside>
+See [Octothinker's comprehensive overview](https://octothinker.substack.com/p/midtraining-the-missing-piece-of) for more details and references.
+</aside>
+
+This is a solid picture! Some readers can feel free to stop here. But I feel like it's missing something in the light of more recent tech reports. These examples are all primarily focused on single-turn tasks. What does midtraining look like if you're trying to train an agent?
+
+## Midtraining for Agents
+
+The simulators perspective describes GPT as not globally agentic, yet capable of behaving in goal-directed ways, insofar as it acts as a simulator of agentic simulacra. If we run with this, we can imagine trying to raise the fidelity of our simulator by increasing the amount of goal-directed behavior it encounters (a scarce commodity in generic internet text). Since this doesn't occur naturally in desirable rates, labs resort to large-scale synth playgrounds and rejection sampling.
+
+<aside>
+The "simulators" framing comes from [janus's essay](https://www.lesswrong.com/posts/vJFdjigzmcXMhNTsx/simulators) on LessWrong.
+</aside>
+
+## Data Rephrasing
+
+This also ties in neatly with one of the other lessons from midtraining: you need to rephrase your data.

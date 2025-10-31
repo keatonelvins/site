@@ -1,0 +1,35 @@
+.astro-code.github-dark {
+  display: none;
+}
+
+html.dark {
+  & .astro-code.github-light {
+    display: none;
+  }
+  & .astro-code.github-dark {
+    display: block;
+  }
+}
+
+.astro-code.github-light,
+.astro-code.github-dark {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+pre.astro-code {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  overflow-x: auto;
+  padding: 1rem;
+  padding-right: calc(1rem - 1px);
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  tab-size: 2;
+  background-color: var(--color-surface);
+}
+
+pre.astro-code code {
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
