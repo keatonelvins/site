@@ -8,26 +8,24 @@ const posts = (await getCollection('blog'))
 ---
 <BaseLayout title="Keaton Elvins">
   <div slot="header-content">
-    <h1 class="text-muted">keaton elvins</h1>
+    <h1 class="text-xl md:text-2xl font-[Erode-Variable]" style="color: var(--color-muted)">keaton elvins</h1>
   </div>
 
   <main class="mb-12 max-w-prose">
-    <p class="mb-6 text-muted text-sm">
-      "It is only through the confining act of writing that the immensity of the nonwritten becomes legible"
-      <br />
-      <span class="text-xs">— Italo Calvino, <em>If on a Winter's Night a Traveler</em></span>
+    <p class="mb-4 text-xl md:text-3xl font-[Erode-Variable]">
+      <em>It's only through the confining act of writing that the immensity of the nonwritten becomes legible.</em>
     </p>
-    <p>I just want to understand, is all.</p>
+    <span class="text-md md:text-xl font-[Erode-Variable]" style="color: var(--color-muted)">— Italo Calvino, <em>If on a Winter's Night a Traveler</em></span>
   </main>
 
   <ul class="space-y-4">
     {posts.map(post => (
       <li>
         <a
-          href={`/blog/${post.id}`}
+          href={`/${post.id}`}
           class="block group"
         >
-          <h2 class="text-3xl md:text-5xl font-semibold leading-tight md:leading-tight group-hover:underline">
+          <h2 class="font-[Erode-Variable] text-3xl md:text-6xl font-semibold leading-tight md:leading-tight group-hover:underline text-right">
             {post.data.title}
           </h2>
         </a>

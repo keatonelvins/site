@@ -11,7 +11,7 @@
 - Astro 5.15.3 (Content Layer API v5)
 - Tailwind CSS 4.1.16 (via Vite plugin)
 - Solid.js 1.9.10 (use sparingly, client-side interactivity only)
-- Fonts: Sentient (serif, body) & Switzer (sans-serif) - variable fonts
+- Fonts: Sentient (serif, body) & Erode (serif) - variable fonts
 - **Package Manager**: pnpm (NOT npm or yarn)
 - **Math**: KaTeX via remark-math + rehype-katex
 - **MDX plugins**: asidesPlugin for side notes
@@ -47,7 +47,7 @@ Put this at the top of `global.css` after `@import "tailwindcss"`.
 
 ```
 src/
-├── content/blog/              # Markdown/MDX posts
+├── content/                   # Markdown/MDX posts (flat structure)
 ├── components/
 │   ├── prose/                 # Custom prose components (Heading, Link, etc.)
 │   └── TableOfContents/       # TOC with progress bar (Solid.js)
@@ -57,11 +57,18 @@ src/
 ├── layouts/
 │   ├── BaseLayout.astro       # Page shell, dark mode, scrollbar, textures
 │   └── BlogPostLayout.astro   # Prose wrapper with TOC
-├── lib/build-time/            # Rehype/remark plugins
-│   └── asidesPlugin.ts        # Wraps <aside> with prev sibling
+├── lib/                       # Client-side utilities (Solid.js)
+│   ├── CommandCenter.tsx      # Command palette (Cmd+K)
+│   ├── Commands.tsx           # Command definitions
+│   ├── Dialog.tsx             # Modal dialog component
+│   ├── Shortcut.tsx           # Keyboard shortcut display
+│   ├── color-scheme.ts        # Dark mode utilities
+│   ├── focus-trap.ts          # Focus management
+│   └── build-time/            # Rehype/remark plugins
+│       └── asidesPlugin.ts    # Wraps <aside> with prev sibling
 ├── pages/
 │   ├── index.astro            # Post list
-│   └── blog/[id].astro        # Dynamic route
+│   └── [id].astro             # Dynamic post route
 └── styles/
     ├── global.css             # Tailwind, fonts, colors, scrollbar
     ├── prose.css              # Markdown styling, .post-aside
@@ -104,9 +111,16 @@ style={{ "background-color": "var(--color-accent)" }}
 
 ### Prose Components
 - Custom components in `src/components/prose/`
-- Passed to `<Content components={...} />` in `blog/[id].astro`
+- Passed to `<Content components={...} />` in `[id].astro`
 - Headings have anchor links, custom styles
 - Lists, blockquotes, tables, code, paragraphs all customized
+
+### Command Center (Cmd+K)
+- Solid.js command palette in `src/lib/CommandCenter.tsx`
+- Keyboard navigation, fuzzy search
+- Commands defined in `src/lib/Commands.tsx`
+- Focus trap and dialog primitives in `src/lib/`
+- Color scheme utilities in `src/lib/color-scheme.ts`
 
 ## Anti-Patterns
 

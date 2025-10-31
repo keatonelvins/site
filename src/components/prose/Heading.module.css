@@ -3,9 +3,9 @@
     margin-top: 2rem;
     margin-bottom: 1.5rem;
 
-    font-family: 'Switzer-Variable', sans-serif;
+    font-family: 'Erode-Variable', serif;
     font-weight: 555;
-    font-size: 1em;
+    font-size: 2em;
   }
 
   & > a {
@@ -19,6 +19,7 @@
       height: 100%;
       margin-left: 0.5rem;
       font-size: 0.7em;
+      font-weight: 300;
       color: var(--color-muted);
       opacity: 0;
     }

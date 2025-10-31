@@ -14,9 +14,16 @@
 }
 
 .prose {
-  max-width: 65ch;
-  font-size: 1.0625rem; /* 17px */
+  max-width: 43rem;
+  font-size: 1.125rem; /* 18px */
   line-height: 1.75;
+
+  & > h1 {
+    font-family: 'Erode-Variable', serif;
+    font-weight: 555;
+    font-size: 3.5em;
+    margin-bottom: 2rem;
+  }
 
   & > * + * {
     margin-top: 1.25rem;
@@ -140,6 +147,7 @@ details {
     max-width: 43rem;
     flex-shrink: 0;
     flex-grow: 1;
+    padding-right: var(--gap);
   }
 
   & > aside {

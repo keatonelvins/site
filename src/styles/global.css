@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant current (&[aria-current="true"]);
+@custom-variant selected (&[aria-selected="true"]);
 
 /* Light mode colors (default) */
 html {
@@ -54,30 +55,28 @@ html.bars {
     font-family: 'Sentient-Variable';
     src: url('/fonts/Sentient-Variable.woff2') format('woff2');
     font-weight: 200 700;
-    font-display: swap;
+    font-display: optional;
     font-style: normal;
 }
 @font-face {
     font-family: 'Sentient-VariableItalic';
     src: url('/fonts/Sentient-VariableItalic.woff2') format('woff2');
     font-weight: 200 700;
-    font-display: swap;
+    font-display: optional;
     font-style: italic;
 }
 
 @font-face {
-    font-family: 'Switzer-Variable';
-    src: url('/fonts/Switzer-Variable.woff2') format('woff2');
-    font-weight: 100 900;
-    font-display: swap;
-    font-style: normal;
+  font-family: 'Erode-Variable';
+  src: url('/fonts/Erode-Variable.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: optional;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'Switzer-VariableItalic';
-    src: url('/fonts/Switzer-VariableItalic.woff2') format('woff2');
-    font-weight: 100 900;
-    font-display: swap;
-    font-style: italic;
+  font-family: 'Erode-VariableItalic';
+  src: url('/fonts/Erode-VariableItalic.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: optional;
+  font-style: italic;
 }
-  
-  
