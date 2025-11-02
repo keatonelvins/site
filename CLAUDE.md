@@ -48,6 +48,8 @@ Put this at the top of `global.css` after `@import "tailwindcss"`.
 ```
 src/
 ├── content/                   # Markdown/MDX posts (flat structure)
+├── images/
+│   └── reads/                 # Book cover images
 ├── components/
 │   ├── prose/                 # Custom prose components (Heading, Link, etc.)
 │   └── TableOfContents/       # TOC with progress bar (Solid.js)
@@ -68,6 +70,7 @@ src/
 │       └── asidesPlugin.ts    # Wraps <aside> with prev sibling
 ├── pages/
 │   ├── index.astro            # Post list
+│   ├── reads.astro            # Book covers grid
 │   └── [id].astro             # Dynamic post route
 └── styles/
     ├── global.css             # Tailwind, fonts, colors, scrollbar
@@ -119,6 +122,11 @@ style={{ "background-color": "var(--color-accent)" }}
 - Commands defined in `src/lib/Commands.tsx`
 - Focus trap and dialog primitives in `src/lib/`
 - Color scheme utilities in `src/lib/color-scheme.ts`
+
+### Reads Page
+- Grid display of book covers from `src/images/reads/`
+- Uses `import.meta.glob()` to load images dynamically
+- Responsive grid: 1 col (mobile) → 2 cols (md) → 3 cols (lg)
 
 ## Anti-Patterns
 

@@ -24,7 +24,7 @@ export const asidesPlugin: Plugin<[AsidesPluginOptions], Root, Root> = (
         for (let j = i - 1; j >= lastAsideIndex; j--) {
           const prev = children[j];
           if (!prev) continue;
-          if (prev.type === "element") {
+          if (prev.type === "element" || prev.type === "mdxJsxFlowElement") {
             childrenToRemove.add(node);
             lastAsideIndex = i;
 
