@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const images = import.meta.glob<{ default: ImageMetadata }>('../images/reads/*.{jpeg,jpg,png,gif}', { eager: true });
+const imageList = Object.entries(images).map(([path, img]) => ({
+  path,
+  image: img.default,
+  name: path.split('/').pop()?.replace(/\.[^.]+$/, '') || 'book'
+}));
+---
+<BaseLayout title="reads">
+  <div class="max-w-5xl mx-auto">
+    <p class="mb-8 text-xl md:text-2xl font-[Erode-Variable]" style="color: var(--color-muted)">
+      march 2023 - nov 2025
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {imageList.map(({ image, name }) => (
+        <div class="overflow-hidden" style="background-color: var(--color-surface)">
+          <Image
+            src={image}
+            alt={name}
+            class="w-full h-auto object-cover"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

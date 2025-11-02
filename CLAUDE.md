@@ -32,7 +32,7 @@ Put this at the top of `global.css` after `@import "tailwindcss"`.
 - Opacity: `color-mix(in oklch, var(--color-accent) 20%, transparent)`
 
 ### Dark Mode Implementation
-- Three-mode: System → Light → Dark → System
+- Three-mode: Light → Dark → System
 - Blocking inline script in `<head>` prevents flash
 - Toggle `.dark` class on `<html>`
 - Persist to `localStorage` key `'theme'`
@@ -78,14 +78,12 @@ src/
 ## Current Features
 
 ### BaseLayout.astro
-- Dark mode toggle (☀️/🌙) in header
 - Paper texture overlay (separate light/dark images)
 - Custom scrollbar (non-Mac only, auto-detected)
 - Blocking scripts for dark mode + scrollbar detection
 - KaTeX CSS loaded from CDN
 
 ### BlogPostLayout.astro
-- Renders prose content with `pb-[50vh]` for comfortable scrolling
 - Table of contents integration
 - Passes `headings` prop to TOC
 

@@ -190,7 +190,7 @@ export function CommandsPalette({
       <CommandInput
         aria-label="Commands"
         class="relative w-full bg-transparent p-2 indent-2 focus:outline-none text-[var(--color-foreground)]"
-        placeholder="What do you need?"
+        placeholder="what is it that you are looking for?"
         autofocus
       />
       <div class="mx-2 border-b border-[var(--color-border)]" />
@@ -205,9 +205,12 @@ export function CommandsPalette({
                 search posts
               </CommandItem>
               <CommandItem href="https://x.com/KeatonElvins">x</CommandItem>
+              <CommandItem href="/reads">reads</CommandItem>
+              <CommandItem href="https://sites.google.com/view/myfuji/">ephemera</CommandItem>
               <CommandItem href="https://github.com/keatonelvins">
                 git
               </CommandItem>
+
             </>
           }
         >
@@ -270,14 +273,6 @@ function CommandItem(props: CommandItemProps) {
     >
       {content}
     </CommandCenterItem>
-  );
-}
-
-function GroupHeading(props: { children: JSX.Element }) {
-  return (
-    <span class="p-2 text-xs font-semibold uppercase leading-none tracking-wider text-[var(--color-muted)]">
-      {props.children}
-    </span>
   );
 }
 

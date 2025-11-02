@@ -6,7 +6,7 @@ const posts = (await getCollection('blog'))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<BaseLayout title="Keaton Elvins">
+<BaseLayout title="home">
   <div slot="header-content">
     <h1 class="text-xl md:text-2xl font-[Erode-Variable]" style="color: var(--color-muted)">keaton elvins</h1>
   </div>
