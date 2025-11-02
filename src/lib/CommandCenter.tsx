@@ -1,15 +1,11 @@
 import {
-  children,
   createContext,
   createEffect,
-  createMemo,
-  createRenderEffect,
   createSelector,
   createSignal,
   createUniqueId,
   type JSX,
   onCleanup,
-  Show,
   splitProps,
   useContext,
 } from "solid-js";
@@ -180,43 +176,6 @@ export function CommandCenter(props: CommandCenterProps) {
     >
       {props.children}
     </CommandCenterCtx.Provider>
-  );
-}
-
-export interface CommandGroupProps {
-  heading?: JSX.Element;
-  children: JSX.Element;
-}
-
-export function CommandGroup(props: CommandGroupProps) {
-  const headingId = createUniqueId();
-  const { matchesFilter } = useCommandCenterCtx();
-
-  const kids = children(() => props.children);
-  const allChildrenAreHidden = createMemo(() => {
-    const ks = (Array.isArray(kids()) ? kids() : [kids()]) as HTMLElement[];
-
-    return ks.every((element) => !matchesFilter(getCommandText(element)));
-  });
-
-  return (
-    <>
-      <Show when={!!props.heading}>
-        <div
-          aria-hidden
-          id={headingId}
-          style={{ display: allChildrenAreHidden() ? "none" : "" }}
-        >
-          {props.heading}
-        </div>
-      </Show>
-      <div
-        role="group"
-        {...(props.heading && { "aria-labelledby": headingId })}
-      >
-        {props.children}
-      </div>
-    </>
   );
 }
 

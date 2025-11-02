@@ -1,7 +1,6 @@
 import {
   createEffect,
   createSignal,
-  type JSX,
   Match,
   onCleanup,
   onMount,
@@ -15,7 +14,6 @@ import {
   CommandCenter,
   CommandCenterDialog,
   CommandCenterTrigger,
-  CommandGroup,
   CommandInput,
   CommandItem as CommandCenterItem,
   type CommandItemProps as CommandCenterItemProps,
@@ -204,25 +202,22 @@ export function CommandsPalette({
               <CommandItem shortcut="alt+slash" onClick={handleShortcut}>
                 search posts
               </CommandItem>
-              <CommandItem href="https://x.com/KeatonElvins">x</CommandItem>
               <CommandItem href="/reads">reads</CommandItem>
+              <CommandItem href="https://x.com/KeatonElvins">x</CommandItem>
+              <CommandItem href="https://github.com/keatonelvins">git</CommandItem>
               <CommandItem href="https://sites.google.com/view/myfuji/">ephemera</CommandItem>
-              <CommandItem href="https://github.com/keatonelvins">
-                git
-              </CommandItem>
-
             </>
           }
         >
           <Match when={page() === "theme"}>
             <CommandItem shortcut="1" onClick={handleShortcut}>
-              set theme to light
+              light theme
             </CommandItem>
             <CommandItem shortcut="2" onClick={handleShortcut}>
-              set theme to dark
+              dark theme
             </CommandItem>
             <CommandItem shortcut="3" onClick={handleShortcut}>
-              set theme to system
+              system theme
             </CommandItem>
           </Match>
           <Match when={page() === "posts"}>
