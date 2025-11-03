@@ -2,14 +2,14 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const images = import.meta.glob<{ default: ImageMetadata }>('../images/reads/*.{jpeg,jpg,png,gif}', { eager: true });
+const images = import.meta.glob<{ default: ImageMetadata }>('../images/bookshelf/*.{jpeg,jpg,png,gif}', { eager: true });
 const imageList = Object.entries(images).map(([path, img]) => ({
   path,
   image: img.default,
   name: path.split('/').pop()?.replace(/\.[^.]+$/, '') || 'book'
 }));
 ---
-<BaseLayout title="reads">
+<BaseLayout title="bookshelf">
   <div class="max-w-5xl mx-auto">
     <p class="mb-8 text-xl md:text-2xl font-[Erode-Variable]" style="color: var(--color-muted)">
       march 2023 - nov 2025

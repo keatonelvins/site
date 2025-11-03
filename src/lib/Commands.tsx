@@ -202,7 +202,7 @@ export function CommandsPalette({
               <CommandItem shortcut="alt+slash" onClick={handleShortcut}>
                 search posts
               </CommandItem>
-              <CommandItem href="/reads">reads</CommandItem>
+              <CommandItem href="/bookshelf">bookshelf</CommandItem>
               <CommandItem href="https://x.com/KeatonElvins">x</CommandItem>
               <CommandItem href="https://github.com/keatonelvins">git</CommandItem>
               <CommandItem href="https://sites.google.com/view/myfuji/">ephemera</CommandItem>
