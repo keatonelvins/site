@@ -8,20 +8,21 @@ const imageList = Object.entries(images).map(([path, img]) => ({
   image: img.default,
   name: path.split('/').pop()?.replace(/\.[^.]+$/, '') || 'book'
 }));
+
 ---
 <BaseLayout title="bookshelf">
-  <div class="max-w-5xl mx-auto">
-    <p class="mb-8 text-xl md:text-2xl font-[Erode-Variable]" style="color: var(--color-muted)">
-      march 2023 - nov 2025
-    </p>
+  <p class="mb-8 text-xl md:text-2xl font-[Erode-Variable]" style="color: var(--color-muted)">
+    march 2023 - nov 2025
+  </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="-mx-10 md:-mx-20 lg:-mx-32">
+    <div class="columns-3 md:columns-5 gap-6 px-4 md:px-8 lg:px-16">
       {imageList.map(({ image, name }) => (
-        <div class="overflow-hidden" style="background-color: var(--color-surface)">
+        <div class="mb-6" style="break-inside: avoid; display: inline-block; width: 100%;">
           <Image
             src={image}
             alt={name}
-            class="w-full h-auto object-cover"
+            class="w-full h-auto"
             loading="lazy"
           />
         </div>
