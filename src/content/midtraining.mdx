@@ -11,59 +11,46 @@ Doria's original essay: [What's the deal with mid-training?](https://www.interco
 
 One reason might be that midtraining is often overshadowed by its flashier upstream and downstream neighbors; pretraining has the gravitas of the largest buildout in the history of the states, and posttraining gets all the lovely hill-climbing graphs (with an additional air of mystique at the frontier).
 
-> pretraining is an elegant science, done by mathematicians who sit in cold rooms writing optimization theory on blackboards, engineers with total absorb of distributed systems of titanic scale
+> pretraining is an elegant science, done by mathematicians who sit in cold rooms writing optimization theory on blackboards, engineers with total absorb of distributed systems of titanic scale.
+> 
 > posttraining is hair raising cowboy research where people drinking a lot of diet coke yell new hyperparameters to try at each other across the room. it's doing too many tables! the vibes are getting worse, turn down the knob! checkpoint gpt-9-final-v320-restart4 is calling me names! the goose is loose
 
 <aside>
-From [@tszzl on X](https://x.com/tszzl/status/1881832891503231161)
+From [@tszzl on X](https://x.com/tszzl/status/1948907851508056495)
 </aside>
 
 What about midtraining, roon? Huh?? You out of funny words?
 
 ## Defining Midtraining
 
-For now, I'll just borrow a definition from Octothinker, although definitely check out Doria's piece for more context:
-
->Mid-training is a mid-stage whose computational and data (token) requirements are intermediate between pre-training and post-training. It aims to achieve specific objectives — such as domain and language expansion<sup>1</sup>, long-context extension<sup>2</sup>, improving data quality<sup>3</sup>, leveraging large-scale synthetic data<sup>4</sup>, and preparing for post-training, among others — by significantly altering data quality and distribution<sup>5</sup> (and/or modifying model architecture to improve inference efficiency<sup>6</sup>).
+For now, I'll just borrow a definition from Octothinker<sup>1</sup>, although definitely check out Doria's piece for more context:
 
 <aside>
-Definition from [Octothinker's comprehensive overview](https://octothinker.substack.com/p/midtraining-the-missing-piece-of)
+<sup>1</sup> [OctoThinker: Mid-training Incentivizes Reinforcement Learning Scaling](https://arxiv.org/pdf/2506.20512) (Wang et al., 2025)
 </aside>
 
-<aside>
-<sup>1</sup> "[Sailor2: Sailing in South-East Asia with Inclusive Multilingual LLMs](https://arxiv.org/abs/2502.12982)" (Dou et al., 2025)
-</aside>
+>Mid-training is a mid-stage whose computational and data (token) requirements are intermediate between pre-training and post-training. It aims to achieve specific objectives — such as domain and language expansion<sup>2</sup>, long-context extension<sup>3</sup>, improving data quality<sup>4</sup>, leveraging large-scale synthetic data<sup>5</sup>, and preparing for post-training, among others — by significantly altering data quality and distribution<sup>5</sup> (and/or modifying model architecture to improve inference efficiency<sup>6</sup>).
 
 <aside>
-<sup>2</sup> "[Phi-3 Technical Report](https://arxiv.org/abs/2404.14219)" (Abdin et al., 2024); "[Phi-4 Technical Report](https://arxiv.org/abs/2412.08905)" (Abdin et al., 2024)
-</aside>
+<sup>2</sup> "[Sailor2: Sailing in South-East Asia with Inclusive Multilingual LLMs](https://arxiv.org/abs/2502.12982)" (Dou et al., 2025)
 
-<aside>
-<sup>3</sup> "[MiniCPM](https://arxiv.org/abs/2404.06395)" (Hu et al., 2024); "[2 OLMo 2 Furious](https://arxiv.org/abs/2501.00656)" (OLMo Team, 2025)
-</aside>
+<sup>3</sup> "[Phi-3 Technical Report](https://arxiv.org/abs/2404.14219)" (Abdin et al., 2024); "[Phi-4 Technical Report](https://arxiv.org/abs/2412.08905)" (Abdin et al., 2024)
 
-<aside>
-<sup>4</sup> "[Qwen2.5 Technical Report](https://arxiv.org/abs/2412.15115)" (Yang et al., 2024); "[Qwen2.5-Math Technical Report](https://arxiv.org/abs/2409.12122)" (Yang et al., 2024); "[Qwen3 Technical Report](https://arxiv.org/abs/2505.09388)" (Yang et al., 2025)
-</aside>
+<sup>4</sup> "[MiniCPM](https://arxiv.org/abs/2404.06395)" (Hu et al., 2024); "[2 OLMo 2 Furious](https://arxiv.org/abs/2501.00656)" (OLMo Team, 2025)
 
-<aside>
-<sup>5</sup> "[Llama 3 Technical Report](https://arxiv.org/abs/2407.21783)" (Dubey et al., 2024); "[Yi Lightning Technical Report](https://arxiv.org/abs/2412.01253)" (Wake et al., 2024)
-</aside>
+<sup>5</sup> "[Qwen2.5 Technical Report](https://arxiv.org/abs/2412.15115)" (Yang et al., 2024); "[Qwen2.5-Math Technical Report](https://arxiv.org/abs/2409.12122)" (Yang et al., 2024); "[Qwen3 Technical Report](https://arxiv.org/abs/2505.09388)" (Yang et al., 2025)
 
-<aside>
-<sup>6</sup> "[Puzzle](https://arxiv.org/abs/2411.19146)" (Bercovich et al., 2024); "[Llama-nemotron: Efficient reasoning models](https://arxiv.org/abs/2505.00949)" (Bercovich et al., 2025)
+<sup>6</sup> "[Llama 3 Technical Report](https://arxiv.org/abs/2407.21783)" (Dubey et al., 2024); "[Yi Lightning Technical Report](https://arxiv.org/abs/2412.01253)" (Wake et al., 2024)
+
+<sup>7</sup> "[Puzzle](https://arxiv.org/abs/2411.19146)" (Bercovich et al., 2024); "[Llama-nemotron: Efficient reasoning models](https://arxiv.org/abs/2505.00949)" (Bercovich et al., 2025)
 </aside>
 
 This is a solid picture! Some readers can feel free to stop here. But I feel like it's missing something in the light of more recent tech reports. These examples are all primarily focused on single-turn tasks. What does midtraining look like if you're trying to train an agent?
 
-## Midtraining for Agents
+## Simulator vs Agent
 
 The simulators perspective describes GPT as not globally agentic, yet capable of behaving in goal-directed ways, insofar as it acts as a simulator of agentic simulacra. If we run with this, we can imagine trying to raise the fidelity of our simulator by increasing the amount of goal-directed behavior it encounters (a scarce commodity in generic internet text). Since this doesn't occur naturally in desirable rates, labs resort to large-scale synth playgrounds and rejection sampling.
 
 <aside>
-The "simulators" framing comes from [janus's essay](https://www.lesswrong.com/posts/vJFdjigzmcXMhNTsx/simulators) on LessWrong.
+Framing pulled from [janus's essay](https://www.lesswrong.com/posts/vJFdjigzmcXMhNTsx/simulators) on LessWrong.
 </aside>
-
-## Data Rephrasing
-
-This also ties in neatly with one of the other lessons from midtraining: you need to rephrase your data.

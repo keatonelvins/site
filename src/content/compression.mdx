@@ -26,12 +26,12 @@ If the distribution/generator your data comes from is non-uniform, then we can e
 
 ## Entropy and Redundancy
 
-One lens we can understand language modeling through is the statistical next-token predictor, the autoregressive text generator extremely fitted to the distributional curve of natural language. This idea is actually super old, going back at least to the 1950's with Shannon's _Prediction and Entropy of Printed English_. Here, Shannon references two key concepts to language modeling: _entropy_ and _redundancy_.
+One lens we can understand language modeling through is the statistical next-token predictor, the autoregressive text generator extremely fitted to the distributional curve of natural language. This idea is actually super old, going back at least to the 1950's with an early Shannon work that references two key concepts to language modeling: _entropy_ and _redundancy_.
 
 <figure>
 > If the language is translated into binary digits (0 or 1) in the most efficient way, the entropy is the average number of binary digits required per letter of the original language. The redundancy, on the other hand, measures the amount of constraint imposed on a text in the language due to its statistical structure, e.g., in English the high frequency of the letter E, the strong tendency of H to follow T or of V to follow Q.
 <figcaption>
-Claude Shannon, [Prediction and Entropy of Printed English](https://www.princeton.edu/~wbialek/rome/refs/shannon_51.pdf)
+  — Claude Shannon, [Prediction and Entropy of Printed English](https://www.princeton.edu/~wbialek/rome/refs/shannon_51.pdf)
 </figcaption>
 </figure>
 <aside>
@@ -50,7 +50,7 @@ $$\min_M H (D \vert M) + C(M)$$
 
 If our model is just a lookup table of our training data, we have achieved $$H(D \vert M) = 0$$. The apparent entropy of the data has been reduced completely. However, this approach is so naïve that our $$C(M)$$ is exactly equal to $$H(D)$$, and we haven't compressed anything!
 
-We want a model that compresses the data best, and is itself most compressible. 
+We want a model that compresses the data best and is itself most compressible. 
 
 ## Grokking
 
