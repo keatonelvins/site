@@ -63,31 +63,24 @@ Before we dive in to this idea and how it relates to [Occam's Razor](https://en.
 </figcaption>
 </figure>
 
-The OpenAI team behind the [og grokking paper](https://arxiv.org/abs/2201.02177)<sup>1</sup> identified that small, algorithmically generated datasets could prove to be a fertile ground for studying generalization of overparametrized neural networks beyond memorization of the training data. In practice, they showed that significantly into the overfitting regime (according to our classical understanding of deep learning), the models would suddenly jump from random guesswork to perfect generalization on validation data.
+The OpenAI team behind the [og grokking paper](https://arxiv.org/abs/2201.02177)[^1] identified that small, algorithmically generated datasets could prove to be a fertile ground for studying generalization of overparametrized neural networks beyond memorization of the training data. In practice, they showed that significantly into the overfitting regime (according to our classical understanding of deep learning), the models would suddenly jump from random guesswork to perfect generalization on validation data.
 
-<aside>
-<sup>1</sup>"[Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets](https://arxiv.org/abs/2201.02177)" (Power et al.)
-</aside>
+From an information theory perspective, the writing had been on the wall. [Results](https://lilianweng.github.io/posts/2017-09-28-information-bottleneck/)[^2] had already demonstrated that DNN training involves two distinct phases: first, the network learns to fully represent the training data; then, it learns to compress the representation of the input and forgets irrelevant details. But, by studying algorithmically generated datasets, e.g. training on division mod 97, researchers could now explore the exact recipes and circuits that cause this to happen.
 
-From an information theory perspective, the writing had been on the wall. [Results](https://lilianweng.github.io/posts/2017-09-28-information-bottleneck/)<sup>2</sup> had already demonstrated that DNN training involves two distinct phases: first, the network learns to fully represent the training data; then, it learns to compress the representation of the input and forgets irrelevant details. But, by studying algorithmically generated datasets, e.g. training on division mod 97, researchers could now explore the exact recipes and circuits that cause this to happen.
-
-<aside>
-<sup>2</sup>"[Anatomize Deep Learning with Information Theory](https://lilianweng.github.io/posts/2017-09-28-information-bottleneck/)" (Lilian Weng)
-</aside>
-
-The first follow-up paper I read was on [*Unifying Grokking and Double Descent*](https://arxiv.org/abs/2303.06173),<sup>3</sup> where the authors viewed both phenomena as inductive biases applying gradient pressure towards better-generalizing but slower to learn patterns. This is the lens of _pattern learning_, which captures the idea that neural networks can use distinct kinds of mechanisms to classify different inputs; for example, they may memorize some examples while applying heuristics to classify others. Grokking happens when slow patterns generalize well and are ultimately preferred by the training regime, but are preceded by faster patterns which generalize poorly. Patterns can be viewed as a function of model size as well as a function of training time, and learning dynamics are similar between these two cases.
-
-<aside>
-<sup>3</sup>"[Unifying Grokking and Double Descent](https://arxiv.org/abs/2303.06173)" (Davies et al.)
-</aside>
+The first follow-up paper I read was on [*Unifying Grokking and Double Descent*](https://arxiv.org/abs/2303.06173)[^3], where the authors viewed both phenomena as inductive biases applying gradient pressure towards better-generalizing but slower to learn patterns. This is the lens of _pattern learning_, which captures the idea that neural networks can use distinct kinds of mechanisms to classify different inputs; for example, they may memorize some examples while applying heuristics to classify others. Grokking happens when slow patterns generalize well and are ultimately preferred by the training regime, but are preceded by faster patterns which generalize poorly. Patterns can be viewed as a function of model size as well as a function of training time, and learning dynamics are similar between these two cases.
 
 ## Pattern Learning and Interpolation
 
-Earlier, I mentioned we can think about language models in their base autoregressive text generator state. Another mental model I like, borrowed from [Francois Chollet](https://fchollet.substack.com/p/how-i-think-about-llm-prompt-engineering), is the _continuous, interpolative_ program database. 
+Earlier, I mentioned we can think about language models in their base autoregressive text generator state. Another mental model I like, borrowed from Francois Chollet, is the _continuous, interpolative_ program database. 
 
+<figure>
 > Instead of being stored as a set of discrete entries, your data is stored as a vector space — a curve. You can move around on the curve (it’s semantically continuous, as we discussed) to explore nearby, related points. And you can interpolate on the curve between different data points to find their in-between.
+<figcaption>
+  — Francois Chollet, [How I think about LLM prompt engineering](https://fchollet.substack.com/p/how-i-think-about-llm-prompt-engineering)
+</figcaption>
+</figure>
 
-This framing seems relevant to pattern learning and better suited to thinking about grokking. If the model has simply memorized the training data, we can't expect interpolation to perform pretty well. For division mod 97, our program database would just be `return 15`, `return 71`, etc. If instead, we have learned a general rule – `lambda x, y, z: (x / y) % z` – or some nuanced abstractions, our model may perform surprisingly well, even perfectly, when tested on unseen samples. It's incredibly difficult to imagine how powerful small side-steps in a well-structured latent space can eventually become.
+This framing seems relevant to pattern learning and better suited to thinking about grokking. If the model has simply memorized the training data, we can't expect interpolation to perform pretty well. For division mod 97, our program database would just be `return 15`, `return 71`, etc. If instead, we have learned a general rule – `lambda x, y, z: (x / y) % z` – or some nuanced abstractions, our model may perform surprisingly well, even perfectly, when tested on unseen samples. Small side-steps in a well-structured latent space can have a surprising power!
 
 <figure>
 > Looking at it, it certainly looks like these LLM's and these Al systems, in some sense they're just interpolators, but the level of abstraction at which they're interpolating keeps going up and up and up, and we keep sort of riding up that chain of abstractions. And then, presumably from a sufficiently elevated point of view, the invention of General Relativity from Newtonian physics is just interpolation at some sufficiently grandiose level of abstraction that perhaps tells us something about the nature of intelligence, human intelligence, as well as about these large language models.
@@ -100,23 +93,13 @@ This framing seems relevant to pattern learning and better suited to thinking ab
 From [Adam Brown on the Dwarkesh Podcast](https://youtu.be/XhB3qH_TFds?si=JwnrIhCEB7bWToyB&t=2460).
 </aside>
 
-And we actually do have evidence that [both memorization and procedural knowledge are at play in current models](https://arxiv.org/abs/2411.12580).<sup>4</sup> By using attribution methods, we can actually _see_ that answering factual questions like "What is the largest ocean on Earth" strongly attribute to documents from pretraining that answer them specifically. Problems that require reasoning, like math or code, instead have weak attribution spread over many examples of related programs/abstractions. This implies that reasoning might just require a dense enough sample distribution of reasoning traces such that continuous interpolation along the ridges of the reasoning latent space can be applied generically.
-
-<aside>
-<sup>4</sup>"[Procedural Knowledge in Pretraining Drives Reasoning in Large Language Models](https://arxiv.org/abs/2411.12580)" (Ruis et al.)
-</aside>
+And we actually do have evidence that [both memorization and procedural knowledge are at play in current models](https://arxiv.org/abs/2411.12580)[^4]. By using attribution methods, we can actually _see_ that answering factual questions like "What is the largest ocean on Earth" strongly attribute to documents from pretraining that answer them specifically. Problems that require reasoning, like math or code, instead have weak attribution spread over many examples of related programs/abstractions. This implies that reasoning might just require a dense enough sample distribution of reasoning traces such that continuous interpolation along the ridges of the reasoning latent space can be applied generically.
 
 ## Circuit Efficiency
 
 So how do we push models towards learning circuits/programs that generalize? Here's where we circle back to MDL and Solmonoff Induction. We need to implement an inductive bias towards less-complex programs: gradient pressure towards the Occam's Razor solution. But how do we measure complexity? Naive parameter count doesn't work.
 
-If we crack out our mechanistic interpretability toolkit, we can start talking about the underlying _circuits_ in the model actually responsible for computation. As [Neel Nanda et al. show](https://arxiv.org/abs/2309.02390),<sup>5</sup> there are multiple circuits that are learned during training and achieve strong performance. When we include weight decay, over time our model will learn to prefer circuits with high "efficiency", i.e. circuits that require less parameter norm to produce a given logit value. In [_Explaining grokking through circuit efficiency_](https://arxiv.org/abs/2301.05217),<sup>6</sup> these results are supported; their interp identified three phases: memorization, then formation of circuits (before grokking phase), then cleanup (grokking), as the circuit both solves the task well and has lower weight than the memorized parameters, meaning weight decay encourages the network to shed the memorized solution.
-
-<aside>
-<sup>5</sup>"[Progress measures for grokking via mechanistic interpretability](https://arxiv.org/abs/2309.02390)" (Nanda et al.)
-
-<sup>6</sup>"[Explaining grokking through circuit efficiency](https://arxiv.org/abs/2301.05217)" (Varma et al.)
-</aside>
+If we crack out our mechanistic interpretability toolkit, we can start talking about the underlying _circuits_ in the model actually responsible for computation. As [shown previously](https://arxiv.org/abs/2309.02390)[^5], there are multiple circuits that are learned during training and achieve strong performance. When we include weight decay, over time our model will learn to prefer circuits with high "efficiency", i.e. circuits that require less parameter norm to produce a given logit value. In [_Explaining grokking through circuit efficiency_](https://arxiv.org/abs/2301.05217)[^6], these results are supported; their interp identified three phases: memorization, then formation of circuits (before grokking phase), then cleanup (grokking), as the circuit both solves the task well and has lower weight than the memorized parameters, meaning weight decay encourages the network to shed the memorized solution.
 
 ## Compression as Complexity
 
@@ -124,22 +107,33 @@ I can buy that parameter norm can act as a proxy for complexity and is a good in
 
 Unfortunately, naïvely trying to compress the weights and tracking the size reduction seems to produce poor complexity bounds. This is due to our model containing random information left over from initialization and the stochasticity of training. If we could surgically strip away this random information, compressing the final parameters would give much tighter bounds. However, it is actually undecidable whether information is random or not!
 
+<figure>
 > Given a machine M, and a string x of length n, construct a decider D which, given the machine and two strings, accepts if the first string is a program that encodes the second string, and rejects if the first string does not encode the second string. Create a machine that will run this decider on all strings of length n-1, and accept iff the decider accepts for one of the strings. If one or more of the strings of length n-1 does not halt, then the decider would be able to solve the halting problem. Since this is not possible, creating a machine which determines if a string is Kolmogorov random has to also be impossible.
+<figcaption>
+Mark Braverman, [Information Theory in Computer Science, Lecture 10](https://www.cs.princeton.edu/courses/archive/fall11/cos597D/L10.pdf)
+</figcaption>
+</figure>
+
+Thankfully, there's a workaround. We can decide if the information is random or not by _seeing if removing it affects model performance_. We can use the difference in loss before/after compression as our rate-distortion metric! To do so, we can take the spectral entropy of each weight matrix (the effective rank) and measure the intrinsic dimension of the transformation parameterized by M. [Adding this term to our loss function speeds up time to grokking!](https://arxiv.org/abs/2412.09810)[^7] We've now moved from parameter-norm as our surrogate for complexity to actual compressability.
+
+Past [other methods that use our understanding of grokking to speed up the phase-transition](https://arxiv.org/abs/2405.20233)[^8], I'm looking for future optimization techniques to speed-run memorization and more directly target generalization. At the limit, this looks like a lightweight (~1B?) reasoning model with little to no factual content memorized. A model that, given enough context, may start to do incredible things on your local machine.
 
 <aside>
-From [Princeton CS course notes on Kolmogorov complexity](https://www.cs.princeton.edu/courses/archive/fall11/cos597D/L10.pdf).
-</aside>
-
-Thankfully, there's a workaround. We can decide if the information is random or not by _seeing if removing it affects model performance_. We can use the difference in loss before/after compression as our rate-distortion metric! To do so, we can take the spectral entropy of each weight matrix (the effective rank) and measure the intrinsic dimension of the transformation parameterized by M. [Adding this term to our loss function speeds up time to grokking!](https://arxiv.org/abs/2412.09810)<sup>7</sup> We've now moved from parameter-norm as our surrogate for complexity to actual compressability.
-
-<aside>
-<sup>7</sup>"[The Complexity Dynamics of Grokking](https://arxiv.org/abs/2412.09810)" (DeMoss et al.)
-</aside>
-
-Past [other methods that use our understanding of grokking to speed up the phase-transition](https://arxiv.org/abs/2405.20233),<sup>8</sup> I'm looking for future optimization techniques to speed-run memorization and more directly target generalization. At the limit, this looks like a lightweight (~1B?) reasoning model with little to no factual content memorized. A model that, given enough context, may start to do incredible things on your local machine.
-
-<aside>
-<sup>8</sup>"[Grokfast: Accelerated Grokking by Amplifying Slow Gradients](https://arxiv.org/abs/2405.20233)" (Lee et al.)
-
 See also [Jan Nano-128](https://jan.ai/docs/jan-models/jan-nano-128) for a very early prototype of Karpathy's "cognitive core".
 </aside>
+
+[^1]: "[Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets](https://arxiv.org/abs/2201.02177)" (Power et al.)
+
+[^2]: "[Anatomize Deep Learning with Information Theory](https://lilianweng.github.io/posts/2017-09-28-information-bottleneck/)" (Lilian Weng)
+
+[^3]: "[Unifying Grokking and Double Descent](https://arxiv.org/abs/2303.06173)" (Davies et al.)
+
+[^4]: "[Procedural Knowledge in Pretraining Drives Reasoning in Large Language Models](https://arxiv.org/abs/2411.12580)" (Ruis et al.)
+
+[^5]: "[Progress measures for grokking via mechanistic interpretability](https://arxiv.org/abs/2309.02390)" (Nanda et al.)
+
+[^6]: "[Explaining grokking through circuit efficiency](https://arxiv.org/abs/2301.05217)" (Varma et al.)
+
+[^7]: "[The Complexity Dynamics of Grokking](https://arxiv.org/abs/2412.09810)" (DeMoss et al.)
+
+[^8]: "[Grokfast: Accelerated Grokking by Amplifying Slow Gradients](https://arxiv.org/abs/2405.20233)" (Lee et al.)

@@ -2,16 +2,4 @@
   font-family: ui-monospace, monospace;
   letter-spacing: -0.02em;
   font-size: 0.97em;
-
-  &::before,
-  &::after {
-    font-weight: 900;
-    color: oklch(0.65 0.01 265);
-    content: "`";
-  }
-
-  :global(.dark) &::before,
-  :global(.dark) &::after {
-    color: oklch(0.4 0.01 150);
-  }
 }

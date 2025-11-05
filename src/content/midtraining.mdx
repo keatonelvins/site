@@ -23,27 +23,9 @@ What about midtraining, roon? Huh?? You out of funny words?
 
 ## Defining Midtraining
 
-For now, I'll just borrow a definition from Octothinker<sup>1</sup>, although definitely check out Doria's piece for more context:
+For now, I'll just borrow a definition from Octothinker[^1], although definitely check out Doria's piece for more context:
 
-<aside>
-<sup>1</sup> [OctoThinker: Mid-training Incentivizes Reinforcement Learning Scaling](https://arxiv.org/pdf/2506.20512) (Wang et al., 2025)
-</aside>
-
->Mid-training is a mid-stage whose computational and data (token) requirements are intermediate between pre-training and post-training. It aims to achieve specific objectives — such as domain and language expansion<sup>2</sup>, long-context extension<sup>3</sup>, improving data quality<sup>4</sup>, leveraging large-scale synthetic data<sup>5</sup>, and preparing for post-training, among others — by significantly altering data quality and distribution<sup>5</sup> (and/or modifying model architecture to improve inference efficiency<sup>6</sup>).
-
-<aside>
-<sup>2</sup> "[Sailor2: Sailing in South-East Asia with Inclusive Multilingual LLMs](https://arxiv.org/abs/2502.12982)" (Dou et al., 2025)
-
-<sup>3</sup> "[Phi-3 Technical Report](https://arxiv.org/abs/2404.14219)" (Abdin et al., 2024); "[Phi-4 Technical Report](https://arxiv.org/abs/2412.08905)" (Abdin et al., 2024)
-
-<sup>4</sup> "[MiniCPM](https://arxiv.org/abs/2404.06395)" (Hu et al., 2024); "[2 OLMo 2 Furious](https://arxiv.org/abs/2501.00656)" (OLMo Team, 2025)
-
-<sup>5</sup> "[Qwen2.5 Technical Report](https://arxiv.org/abs/2412.15115)" (Yang et al., 2024); "[Qwen2.5-Math Technical Report](https://arxiv.org/abs/2409.12122)" (Yang et al., 2024); "[Qwen3 Technical Report](https://arxiv.org/abs/2505.09388)" (Yang et al., 2025)
-
-<sup>6</sup> "[Llama 3 Technical Report](https://arxiv.org/abs/2407.21783)" (Dubey et al., 2024); "[Yi Lightning Technical Report](https://arxiv.org/abs/2412.01253)" (Wake et al., 2024)
-
-<sup>7</sup> "[Puzzle](https://arxiv.org/abs/2411.19146)" (Bercovich et al., 2024); "[Llama-nemotron: Efficient reasoning models](https://arxiv.org/abs/2505.00949)" (Bercovich et al., 2025)
-</aside>
+>Mid-training is a mid-stage whose computational and data (token) requirements are intermediate between pre-training and post-training. It aims to achieve specific objectives — such as domain and language expansion[^2], long-context extension[^3], improving data quality[^4], leveraging large-scale synthetic data[^5], and preparing for post-training, among others — by significantly altering data quality and distribution[^5] (and/or modifying model architecture to improve inference efficiency[^6]).
 
 This is a solid picture! Some readers can feel free to stop here. But I feel like it's missing something in the light of more recent tech reports. These examples are all primarily focused on single-turn tasks. What does midtraining look like if you're trying to train an agent?
 
@@ -54,3 +36,15 @@ The simulators perspective describes GPT as not globally agentic, yet capable of
 <aside>
 Framing pulled from [janus's essay](https://www.lesswrong.com/posts/vJFdjigzmcXMhNTsx/simulators) on LessWrong.
 </aside>
+
+[^1]: "[OctoThinker: Mid-training Incentivizes Reinforcement Learning Scaling](https://arxiv.org/pdf/2506.20512)" (Wang et al., 2025)
+
+[^2]: "[Sailor2: Sailing in South-East Asia with Inclusive Multilingual LLMs](https://arxiv.org/abs/2502.12982)" (Dou et al., 2025)
+
+[^3]: "[Phi-3 Technical Report](https://arxiv.org/abs/2404.14219)" (Abdin et al., 2024); "[Phi-4 Technical Report](https://arxiv.org/abs/2412.08905)" (Abdin et al., 2024)
+
+[^4]: "[MiniCPM](https://arxiv.org/abs/2404.06395)" (Hu et al., 2024); "[2 OLMo 2 Furious](https://arxiv.org/abs/2501.00656)" (OLMo Team, 2025)
+
+[^5]: "[Qwen2.5 Technical Report](https://arxiv.org/abs/2412.15115)" (Yang et al., 2024); "[Qwen2.5-Math Technical Report](https://arxiv.org/abs/2409.12122)" (Yang et al., 2024); "[Qwen3 Technical Report](https://arxiv.org/abs/2505.09388)" (Yang et al., 2025)
+
+[^6]: "[Llama 3 Technical Report](https://arxiv.org/abs/2407.21783)" (Dubey et al., 2024); "[Yi Lightning Technical Report](https://arxiv.org/abs/2412.01253)" (Wake et al., 2024)
