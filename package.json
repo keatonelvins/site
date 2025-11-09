@@ -13,6 +13,7 @@
     "@astrojs/solid-js": "^5.1.2",
     "@astrojs/vercel": "^9.0.0",
     "@tailwindcss/vite": "^4.1.16",
+    "@vercel/analytics": "^1.5.0",
     "astro": "^5.15.3",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { Commands } from '../lib/Commands';
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro'
 
 const { title } = Astro.props;
 
@@ -62,5 +63,6 @@ const posts = (await getCollection('blog'))
       style="background-image: url(/paper-dark.jpg)"
       class="pointer-events-none fixed inset-0 z-50 select-none bg-repeat bg-[length:512px_512px] opacity-5 hidden dark:block"
     ></div>
+    <Analytics/> 
   </body>
 </html>
