@@ -1,10 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import { Commands } from '../lib/Commands';
+import SEO from '../components/SEO.astro';
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro'
 
-const { title } = Astro.props;
+const { title, description, type, image } = Astro.props;
 
 const posts = (await getCollection('blog'))
   .filter(post => !post.data.draft)
@@ -26,6 +27,7 @@ const posts = (await getCollection('blog'))
     <link rel="preload" href="/fonts/Erode-VariableItalic.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
     <title>{title}</title>
+    {description && <SEO title={title} description={description} type={type} image={image} />}
     <!-- Dark mode initialization (blocking to prevent flash) -->
     <script is:inline>
       const scheme = localStorage.getItem('theme');

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.9",
+    "@astrojs/sitemap": "^3.6.0",
     "@astrojs/solid-js": "^5.1.2",
     "@astrojs/vercel": "^9.0.0",
     "@tailwindcss/vite": "^4.1.16",

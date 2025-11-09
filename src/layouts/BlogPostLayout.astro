@@ -6,7 +6,7 @@ import '../styles/shiki.css';
 
 const { frontmatter, headings = [] } = Astro.props;
 ---
-<BaseLayout title={frontmatter.title}>
+<BaseLayout title={frontmatter.title} description={frontmatter.description} type="article">
   <div class="prose pb-[50vh]">
     <h1>{frontmatter.title}</h1>
     <slot />

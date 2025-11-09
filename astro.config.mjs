@@ -7,11 +7,14 @@ import mdx from '@astrojs/mdx';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { asidesPlugin } from './src/lib/build-time/asidesPlugin';
+import sitemap from '@astrojs/sitemap';
 
 import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://keatonelvins.com',
+
   vite: {
     plugins: [tailwindcss()]
   },
@@ -38,7 +41,8 @@ export default defineConfig({
           dark: 'github-dark'
         }
       }
-    })
+    }),
+    sitemap()
   ],
   adapter: vercel()
 });
