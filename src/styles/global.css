@@ -3,15 +3,18 @@
 @custom-variant current (&[aria-current="true"]);
 @custom-variant selected (&[aria-selected="true"]);
 
+dialog::backdrop {
+  background-color: transparent;
+}
+
 /* Light mode colors (default) */
 html {
   --color-background: oklch(0.99 0.005 100);
   --color-foreground: oklch(0.08 0.02 275);
   --color-muted: oklch(0.36 0.015 275);
-  --color-surface: oklch(0.90 0.006 100);
+  --color-surface: oklch(0.94 0.01 100);
   --color-border: oklch(0.82 0.006 100);
   --color-accent: oklch(0.62 0.32 28);
-  --color-accent-foreground: oklch(1 0 0);
 }
 
 /* Dark mode colors */
@@ -19,10 +22,9 @@ html.dark {
   --color-background: oklch(0.15 0.01 150);
   --color-foreground: oklch(0.88 0.01 150);
   --color-muted: oklch(0.6 0.01 150);
-  --color-surface: oklch(0.18 0.01 150);
+  --color-surface: oklch(0.20 0.01 150);
   --color-border: oklch(0.25 0.02 150);
   --color-accent: oklch(0.85 0.15 95);
-  --color-accent-foreground: oklch(0.2 0.01 265);
 }
 
 /* Custom scrollbar (non-Mac only) */

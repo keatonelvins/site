@@ -169,7 +169,7 @@ export function CommandsPalette({
     <CommandCenterDialog
       onClose={() => setPage(undefined)}
       ref={(ref) => (dialog = ref)}
-      class="relative mx-auto w-96 max-w-full transform flex-col overflow-hidden rounded-xl p-0 shadow-2xl ring-1 transition-all [&[open]]:flex bg-[var(--color-surface)]"
+      class="relative mx-auto w-96 max-w-full transform flex-col overflow-hidden rounded-xl p-0 shadow-2xl ring-1 dark:ring-[0.4px] dark:ring-white transition-all [&[open]]:flex bg-[var(--color-surface)]"
       style={{
         "--tw-ring-color": "color-mix(in oklch, var(--color-foreground) 20%, transparent)",
       } as any}
@@ -196,12 +196,8 @@ export function CommandsPalette({
         <Switch
           fallback={
             <>
-              <CommandItem shortcut="alt+t" onClick={handleShortcut}>
-                theme
-              </CommandItem>
-              <CommandItem shortcut="alt+slash" onClick={handleShortcut}>
-                search posts
-              </CommandItem>
+              <CommandItem shortcut="alt+t" onClick={handleShortcut}>theme</CommandItem>
+              <CommandItem shortcut="alt+slash" onClick={handleShortcut}>posts</CommandItem>
               <CommandItem href="/bookshelf">bookshelf</CommandItem>
               <CommandItem href="https://sites.google.com/view/myfuji/">ephemera</CommandItem>
             </>

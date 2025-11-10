@@ -17,19 +17,4 @@ const posts = (await getCollection('blog'))
     </p>
     <span class="text-md md:text-xl font-[Erode-Variable]" style="color: var(--color-muted)">— Italo Calvino, <em>If on a Winter's Night a Traveler</em></span>
   </main>
-
-  <ul class="space-y-4">
-    {posts.map(post => (
-      <li>
-        <a
-          href={`/${post.id}`}
-          class="block group"
-        >
-          <h2 class="font-[Erode-Variable] text-3xl md:text-6xl font-semibold leading-tight md:leading-tight group-hover:underline text-right">
-            {post.data.title}
-          </h2>
-        </a>
-      </li>
-    ))}
-  </ul>
 </BaseLayout>

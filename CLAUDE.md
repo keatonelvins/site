@@ -91,7 +91,7 @@ src/
 - Passes `headings` prop to TOC
 
 ### Color Variables (in `global.css`)
-`--color-background`, `--color-foreground`, `--color-muted`, `--color-surface`, `--color-border`, `--color-accent`, `--color-accent-foreground`
+`--color-background`, `--color-foreground`, `--color-muted`, `--color-surface`, `--color-border`, `--color-accent`
 
 **IMPORTANT**: Colors are NOT in Tailwind theme. Use inline styles:
 ```tsx
