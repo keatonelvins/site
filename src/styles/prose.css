@@ -64,6 +64,14 @@
     font-family: 'Sentient-VariableItalic', serif;
     margin-top: 0.5rem;
   }
+
+  & img {
+    display: block;
+    margin-inline: auto;
+    max-height: 500px;
+    width: auto;
+    max-width: 100%;
+  }
 }
 
 /* Details/summary collapsible elements */
