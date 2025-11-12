@@ -60,11 +60,11 @@ const posts = (await getCollection('blog'))
     <!-- Paper texture overlay -->
     <div
       style="background-image:url(/paper-light.jpeg);mix-blend-mode:multiply;opacity:0.35;"
-      class="pointer-events-none fixed inset-0 z-50 select-none bg-repeat bg-[length:512px_512px] dark:hidden"
+      class="pointer-events-none absolute inset-0 z-50 select-none bg-repeat bg-[length:512px_512px] dark:hidden"
     ></div>
     <div
       style="background-image: url(/paper-dark.jpg)"
-      class="pointer-events-none fixed inset-0 z-50 select-none bg-repeat bg-[length:512px_512px] opacity-5 hidden dark:block"
+      class="pointer-events-none absolute inset-0 z-50 select-none bg-repeat bg-[length:512px_512px] opacity-5 hidden dark:block"
     ></div>
     <Analytics/> 
   </body>
